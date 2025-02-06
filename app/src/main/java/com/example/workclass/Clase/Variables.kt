@@ -18,7 +18,7 @@ fun main (){
     val isGreater:Boolean = false
 
     //Collection variables
-    val names = arrayOf("Josue","Ana ","Victoria","Sebas")
+    val names = arrayOf("Josue","Ana ","Victoria" , "Sebas")
 
     println(age)
 
@@ -48,5 +48,17 @@ fun printArray(names:Array<String>) {
     for (name in names) {
         println("Hello $name, ")
 
+    }
+
+
+    fun isEven(numbers: Array<Int>) {
+        for (number in numbers) {
+            if (number % 2 == 0) {
+                println("The number $number is even")
+            } else {
+                println("The number $number is odd")
+            }
+
+        }
     }
 }
