@@ -16,20 +16,24 @@ import com.example.workclass.ui.theme.WorkClassTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        //enableEdgeToEdge()
         setContent {
             WorkClassTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
+                Text(text = "Hello World!")
+                Text(text = "Welcome to Android this is yor first APP")
+                // A surface container using the 'background' color from the theme
+                /*Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                   Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
+                */
             }
         }
     }
 }
-
+/*
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
@@ -45,3 +49,4 @@ fun GreetingPreview() {
         Greeting("Android")
     }
 }
+*/
