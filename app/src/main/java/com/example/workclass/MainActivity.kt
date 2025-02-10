@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -19,10 +22,33 @@ class MainActivity : ComponentActivity() {
         //enableEdgeToEdge()
         setContent {
             WorkClassTheme {
-                Text(text = "Hello World!")
-                Text(text = "Welcome to Android this is yor first APP")
+               Row(){
+                   Column(){
+                       Text(text = "Hello World!")
+                       Text(text = "Welcome to Android this is yor first APP")
+                   }
+                   Column(){
+                       Text(text = "Hello World!")
+                       Text(text = "Welcome to Android this is yor first APP")
+                   }
+                   Column(){
+                       Text(text = "Hello World!")
+                       Text(text = "Welcome to Android this is yor first APP")
+                   }
+
+                }
+               /* Row(){
+                    Text(text = "Hello World!")
+                    Text(text = "Welcome to Android this is yor first APP")
+                }*/
+                // sirve para poder poner poner un elemento delante del otoro pudiendo definir en donde queda
+              /*  Box(){
+                    Text(text = "Hello World!")
+                    Text(text = "Welcome to Android this is yor first APP")
+                }*/
+
                 // A surface container using the 'background' color from the theme
-                /*Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+               /* Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                    Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
