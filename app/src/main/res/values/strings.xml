@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WorkClass</string>
+    <string name="sample_text">Hola mundo desde Android Studio Strings.xml</string>
+
 </resources>
