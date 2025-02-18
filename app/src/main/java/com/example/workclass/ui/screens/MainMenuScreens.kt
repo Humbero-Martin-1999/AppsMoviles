@@ -12,20 +12,25 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 
 @Composable
-fun MainMenuScreen(navController: NavHostController){
+fun MainMenuScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .padding(10.dp)
             .fillMaxSize()
-    ){
+    ) {
         Text("main menu")
         Button(
-            onClick = {navController.navigate("home_screen")}
+            onClick = { navController.navigate("home_screen") }
         ) {
             Text("Go to Home Screen")
 
         }
+        Button(
+            onClick = { navController.navigate("test_screen") }
+        ) {
+            Text("Go to test Screen")
 
-}
+        }
 
+    }
 }

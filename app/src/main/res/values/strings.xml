@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">WorkClass</string>
     <string name="sample_text">Hola mundo desde Android Studio Strings.xml</string>
+    <string name="ejemplo">"Las Norman Doors son puertas mal diseñadas que confunden a las personas sobre cómo usarlas.
+        Por ejemplo, una puerta que tiene una barra horizontal (que suele indicar que hay que empujar) pero que en realidad hay que jalar.
+        ¿Por qué son importantes?
+            Este concepto se utiliza en el diseño de experiencia de usuario (UX) para destacar la importancia de crear productos e interfaces
+        intuitivas y fáciles de entender. Si un usuario necesita instrucciones para usar algo tan simple como una puerta, entonces
+        el diseño ha fallado."</string>
+
 
 </resources>

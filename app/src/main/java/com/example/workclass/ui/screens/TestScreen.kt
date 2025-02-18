@@ -17,10 +17,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -31,35 +31,36 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.workclass.R
-import androidx.compose.ui.Modifier
+import com.example.workclass.SetupNavGraph
+import com.example.workclass.ui.theme.WorkClassTheme
+
 
 @Composable
-fun TestScreen (navController: NavHostController){
-    Column (
+fun TestScreen(navController: NavHostController){
+    Column(
         modifier = Modifier
             .padding(10.dp)
             .fillMaxSize()
-    ){
+    ) {
         Text("Test Screen")
         Button(
-            onClick = {navController.navigate("main_menu")}
+            onClick = { navController.navigate("main_menu")}
+
         ) {
-            Text("Go to Main Menu")
-        }
-        Button(
-            onClick = {navController.navigate("home_screen")}
-        ) {
-            Text("Go to Home Screen")
+            Text("Return to Main Menu")
         }
 
+        TextComposable("Roberto")
+        ModifierExample2()
+        ModifierExample2()
+        ModifierExample3()
+        ModifierExample4()
+        CustomText()
+        Picture()
     }
 }
-
-
-
-
-
 
 
 @Preview(showBackground = true)
@@ -68,110 +69,125 @@ fun TextComposable(name: String = "Empty") {
     Text("Welcome")
     Text(name)
 }
-
 @Preview(showBackground = true)
 @Composable
-fun ModifierExampleOne() {
-    Column(
-        modifier = androidx.compose.ui.Modifier
-            .padding(24.dp, 10.dp, 5.dp, 20.dp)
-
-    ) {
-        Text("My name is")
+fun ModifierExample1(){
+    Column (
+        modifier = Modifier
+            .padding(40.dp,30.dp,20.dp,10.dp)//Izquierda,Arriba,Derecha y Abajo
+    ){
+        Text("Hello World")
     }
 }
-
 @Preview(showBackground = true)
 @Composable
-fun ModifierExampleTwo() {
-    Column(
-        modifier = androidx.compose.ui.Modifier
+fun ModifierExample2(){
+    Column (
+        modifier = Modifier
             .padding(24.dp)
             .fillMaxWidth()
-            .clickable(onClick = {})
-    ) {
-        Text("My name is")
+            .clickable (onClick = {clickAction() })
+    ){
+        Text("Hello World")
     }
 }
 
-fun clickAction(){
-    println("column clicked")
+
+fun clickAction (){
+    println("Column Clicked")
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ModifierExampleThree(){
-    Column(
-        modifier = androidx.compose.ui.Modifier
+fun ModifierExample3(){
+    Column (
+        modifier = Modifier
             .fillMaxHeight()
             .padding(16.dp)
             .background(Color.Cyan)
-            .border(width = 2.dp, Color.Black)
+            .border(width = 2.dp,color= Color.Black)
             .width(200.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
+
+
     ) {
-        TextComposable("1.")
+        TextComposable("1")
         TextComposable("2")
         TextComposable("3")
         TextComposable("4")
+
     }
+
+
+
 }
+
 @Preview(showBackground = true)
 @Composable
-fun ModifierExampleFour(){
-    Box(
-        modifier = androidx.compose.ui.Modifier
-            .background(Color.Green)
+fun ModifierExample4() { //Es una caja donde tenemos 9 numeros
+    Box (
+        modifier = Modifier
+            .background(Color.Red)
             .padding(10.dp)
-            .height(300.dp)
             .width(300.dp)
+            .height(300.dp)
     ){
-        Text("1", androidx.compose.ui.Modifier.align(Alignment.TopStart))
-        Text("2", androidx.compose.ui.Modifier.align(Alignment.TopCenter))
-        Text("3", androidx.compose.ui.Modifier.align(Alignment.TopEnd))
-        Text("4", androidx.compose.ui.Modifier.align(Alignment.CenterStart))
-        Text("5", androidx.compose.ui.Modifier.align(Alignment.Center))
-        Text("6", androidx.compose.ui.Modifier.align(Alignment.CenterEnd))
-        Text("7", androidx.compose.ui.Modifier.align(Alignment.BottomStart))
-        Text("8", androidx.compose.ui.Modifier.align(Alignment.BottomCenter))
-        Text("9", androidx.compose.ui.Modifier.align(Alignment.BottomEnd))
+        Text("1",Modifier.align(Alignment.TopStart))//
+        Text("2",Modifier.align(Alignment.TopCenter))
+        Text("3",Modifier.align(Alignment.TopEnd))
+        Text("4",Modifier.align(Alignment.CenterStart))
+        Text("5",Modifier.align(Alignment.Center))
+        Text("6",Modifier.align(Alignment.CenterEnd))
+        Text("7",Modifier.align(Alignment.BottomStart))
+        Text("8",Modifier.align(Alignment.BottomCenter))
+        Text("9",Modifier.align(Alignment.BottomEnd))
+
+
+
+
+
+
+
 
     }
 }
+
 @Preview(showBackground = true)
 @Composable
-fun CustomText(){
-    Column() {
+fun CustomText(name: String = "Empty") { //Texto con un diseño diferente
+    Column () {
+
         Text(
             stringResource(R.string.sample_text),
-            color = colorResource(R.color.teal_700),
-            fontSize = 10.sp,
+            color = colorResource(R.color.purple_500),
+            fontSize = 20.sp,
             fontStyle = FontStyle.Italic,
-            fontWeight = FontWeight.Thin
+            fontWeight = FontWeight.ExtraBold
         )
-        val gradientColor = listOf(Color.Cyan, Color.Magenta, Color.Green)
+        val gradientColors = listOf(Color.Cyan, Color.Red, colorResource(R.color.purple_500)) //Una lista de colores que sera el tipo arcoiris dentro del texto
         Text(
             stringResource(R.string.sample_text),
-            style = TextStyle(Brush.linearGradient(colors = gradientColor))
+            style = TextStyle(brush = Brush.linearGradient(colors = gradientColors))//Nos permite hacer un degradado de color
+
         )
     }
 }
-@Preview(showBackground = true)
+@Preview(showBackground = true) //Funcion para mostrar una imagen
 @Composable
-fun Picture (){
-    Column(
-        modifier = androidx.compose.ui.Modifier
+fun Picture(){
+    Column (
+        modifier = Modifier
             .fillMaxWidth()
             .background(Color.Black)
             .height(300.dp)
     ){
         Image(
-            modifier = androidx.compose.ui.Modifier
+            modifier = Modifier
                 .fillMaxWidth(),
-            painter = painterResource(R.drawable.image),
-            contentDescription = "Logo Outlast",
-            contentScale = ContentScale.FillHeight
+            painter = painterResource(R.drawable.ic_launcher_background),
+            contentDescription = "Logo ofiicial del Instituto Tecnologico de Aguascalientes",
+            contentScale = ContentScale.Crop //La forma que tomara la imagen recortada, amplia, etc
         )
     }
 }
