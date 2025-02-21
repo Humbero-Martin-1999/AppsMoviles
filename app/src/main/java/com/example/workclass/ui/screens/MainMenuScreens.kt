@@ -32,5 +32,12 @@ fun MainMenuScreen(navController: NavHostController) {
 
         }
 
+        Button(
+            onClick = { navController.navigate("MiAplicacioniParamount") }
+        ) {
+            Text("Go to Paramount Screen")
+
+        }
+
     }
 }

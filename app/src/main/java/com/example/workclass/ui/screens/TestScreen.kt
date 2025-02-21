@@ -52,7 +52,7 @@ fun TestScreen(navController: NavHostController){
             Text("Return to Main Menu")
         }
 
-        TextComposable("Roberto")
+        TextComposable("Humberto")
         ModifierExample2()
         ModifierExample2()
         ModifierExample3()
@@ -125,7 +125,7 @@ fun ModifierExample3(){
 
 @Preview(showBackground = true)
 @Composable
-fun ModifierExample4() { //Es una caja donde tenemos 9 numeros
+fun ModifierExample4() { //Is a Box donde tenemos 9 numeros
     Box (
         modifier = Modifier
             .background(Color.Red)
@@ -173,7 +173,7 @@ fun CustomText(name: String = "Empty") { //Texto con un diseño diferente
         )
     }
 }
-@Preview(showBackground = true) //Funcion para mostrar una imagen
+@Preview(showBackground = true)
 @Composable
 fun Picture(){
     Column (
@@ -186,7 +186,7 @@ fun Picture(){
             modifier = Modifier
                 .fillMaxWidth(),
             painter = painterResource(R.drawable.ic_launcher_background),
-            contentDescription = "Logo ofiicial del Instituto Tecnologico de Aguascalientes",
+            contentDescription = "Imagen cualquiera",
             contentScale = ContentScale.Crop //La forma que tomara la imagen recortada, amplia, etc
         )
     }

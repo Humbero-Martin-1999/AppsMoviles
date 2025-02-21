@@ -43,8 +43,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.workclass.ui.screens.HomeScreen
 import com.example.workclass.ui.screens.MainMenuScreen
+import com.example.workclass.ui.screens.UIParamountScreen
 import com.example.workclass.ui.screens.TestScreen
 import com.example.workclass.ui.theme.WorkClassTheme
+import com.example.workclass.ui.screens.UIParamountScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,44 +55,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             WorkClassTheme {
                 ComposeMultiScreenApp()
-                //  Column(){
-                //    Column() {
-                //      TextComposable("Marco")
-                //    TextComposable()
-                //  TextComposable()
-                //TextComposable()
-                //}
-                //Row() {
-                //  TextComposable()
-                //TextComposable()
-                // TextComposable()
-                //TextComposable()
-                //}
-                //Column {
-                //  ModifierExampleTwo()
-                // ModifierExampleFour()
-                // CustomText()
-                //}
-                //  }
-
-                /*
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-
-                 */
             }
         }
     }
 
-    private fun column(function: () -> Unit) {
-
-    }
-
-
+}
 
     @Composable
     fun ComposeMultiScreenApp(){
@@ -103,25 +72,11 @@ class MainActivity : ComponentActivity() {
             composable("main_menu"){ MainMenuScreen(navController)}
             composable("home_screen"){ HomeScreen(navController)}
             composable("test_screen"){ TestScreen(navController)}
+            composable("MiAplicacioniParamount"){ UIParamountScreen(navController)}
 
-            }
+
         }
-
-
-}
-/*
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    LittleProjectAndroidTheme {
-        Greeting("Android")
     }
-}*/
+
+
+

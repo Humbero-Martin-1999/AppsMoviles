@@ -1,12 +1,9 @@
 package com.example.workclass.ui.screens
-
-import androidx.benchmark.perfetto.Row
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,8 +13,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-
-// Importaciones adicionales necesarias
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -97,7 +92,7 @@ fun Content2(){
             .fillMaxWidth()
             .padding(5.dp)
     ){
-        Row (){
+        Row {
 
             Image(
                 modifier = Modifier
@@ -107,7 +102,7 @@ fun Content2(){
                 contentDescription = "Android Logo",
                 contentScale = ContentScale.Crop
             )
-            Column (){
+            Column {
                 Text(
                     text = "This is a Title",
                     fontSize = 12.sp,
