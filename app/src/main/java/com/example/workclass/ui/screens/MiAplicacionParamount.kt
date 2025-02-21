@@ -45,7 +45,7 @@ fun UIParamountScreen(navController: NavHostController) {
                 contentScale = ContentScale.Crop
             )
 
-            // Fondo con opacidad
+            // Modifier para cambaiar la opacidad
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -54,7 +54,6 @@ fun UIParamountScreen(navController: NavHostController) {
             )
 
 
-            // 3) Contenido principal en primer plano (Column con scroll)
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -67,7 +66,7 @@ fun UIParamountScreen(navController: NavHostController) {
 
                 Spacer(modifier = Modifier.height(30.dp))
 
-                // 4) Imagen principal
+                // 4) Imagen Pelicula
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -81,18 +80,23 @@ fun UIParamountScreen(navController: NavHostController) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(400.dp),
+
                         contentScale = ContentScale.Crop
+
                     )
                 }
 
                 Spacer(modifier = Modifier.height(5.dp))
 
                 // 5) Botón redondo de Play y texto "Reproducir"
+
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     FloatingActionButton(
                         onClick = { /* Acción para reproducir */ },
-                        containerColor = Color.White,
-                        contentColor = Color.Black
+                        containerColor = Color.Gray,
+                        contentColor = Color.Black,
+                        shape = RoundedCornerShape(100),
+                        elevation = FloatingActionButtonDefaults.elevation(100.dp),
                     ) {
                         Icon(
                             imageVector = Icons.Filled.PlayArrow,
@@ -130,7 +134,18 @@ fun UIParamountScreen(navController: NavHostController) {
                             .background(color = Color.Gray, shape = RoundedCornerShape(50))
                             .padding(horizontal = 8.dp, vertical = 4.dp)
                     ) {
-                        Text(text = text, color = Color.White, fontSize = 14.sp)
+                        Text(text = text, color = Color.White, fontSize = 12.sp)
+                    }
+                }
+                @Composable
+                fun OvalTextSmall(text: String) {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .background(color = Color.DarkGray, shape = RoundedCornerShape(75))
+                            .padding(horizontal = 8.dp, vertical = 2.dp)
+                    ) {
+                        Text(text = text, color = Color.White, fontSize = 10.sp)
                     }
                 }
 
@@ -144,7 +159,7 @@ fun UIParamountScreen(navController: NavHostController) {
                     Spacer(modifier = Modifier.width(8.dp))
                     OvalText(text = "1h 40m")
                     Spacer(modifier = Modifier.width(8.dp))
-                    OvalText(text = "A")
+                    OvalTextSmall(text = "A")
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -202,7 +217,7 @@ fun UIParamountScreen(navController: NavHostController) {
 @Composable
 fun BottomNavigationBar() {
     NavigationBar(
-        containerColor = Color.Black,
+        containerColor = Color.Unspecified,
         modifier = Modifier.fillMaxWidth()
     ) {
         NavigationBarItem(
@@ -280,24 +295,4 @@ fun BotonAccion(
         )
     }
 }
-@Composable
-fun MiAplicacioniParamount() {
-    MaterialTheme {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Blue),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "Pantalla MiAplicacioniParamount",
-                color = Color.White,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
-    }
-}
-//hola
-//hola
 
