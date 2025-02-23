@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import com.example.workclass.R
 
@@ -45,51 +46,63 @@ fun UIParamountScreen(navController: NavHostController) {
                 contentScale = ContentScale.Crop
             )
 
-            // Modifier para cambaiar la opacidad
+            // Modifier para la opacidad
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     // Ajuste la opacidad del fondo
                     .background(Color.Black.copy(alpha = 0.890f))
             )
+            // botón de volver
+            IconButton(
+                onClick = { navController.navigate("main_menu") },
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(16.dp)
+                    .zIndex(1f)
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Close,
+                    contentDescription = "Volver",
+                    tint = Color.White
+                )
+            }
 
 
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .verticalScroll(scrollState),
+                    .verticalScroll(scrollState)
+                    .padding(top = 70.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
-            )
+            ) {
 
-
-            {
-
-                Spacer(modifier = Modifier.height(30.dp))
-
-                // 4) Imagen Pelicula
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 49.dp)
-                        .clip(RoundedCornerShape(20.dp))
-
+                        .padding(horizontal = 49.dp),
+                    contentAlignment = Alignment.Center // Centra horizontalmente
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.portada_nemo),
-                        contentDescription = "Portada de Finding Nemo",
+
+                    // Box interno con tamaño fijo y esquinas redondeadas
+                    Box(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(400.dp),
-
-                        contentScale = ContentScale.Crop
-
-                    )
+                            .width(200.dp)
+                            .height(300.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.portada_nemo),
+                            contentDescription = "Portada de Finding Nemo",
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop
+                        )
+                    }
                 }
 
-                Spacer(modifier = Modifier.height(5.dp))
+                Spacer(modifier = Modifier.height(50.dp))
 
-                // 5) Botón redondo de Play y texto "Reproducir"
-
+                        // Botón de reproducir
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     FloatingActionButton(
                         onClick = { /* Acción para reproducir */ },
@@ -110,6 +123,7 @@ fun UIParamountScreen(navController: NavHostController) {
                         modifier = Modifier.padding(top = 8.dp)
                     )
                 }
+
 
                 Spacer(modifier = Modifier.height(16.dp))
 
