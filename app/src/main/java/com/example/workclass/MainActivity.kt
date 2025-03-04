@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.workclass.ui.screens.ComponentsScreen
 import com.example.workclass.ui.screens.HomeScreen
 import com.example.workclass.ui.screens.MainMenuScreen
 import com.example.workclass.ui.screens.UIParamountScreen
@@ -39,10 +40,16 @@ class MainActivity : ComponentActivity() {
             composable("home_screen"){ HomeScreen(navController)}
             composable("test_screen"){ TestScreen(navController)}
             composable("MiAplicacioniParamount"){ UIParamountScreen(navController) }
+            composable("components_screen"){ ComponentsScreen(navController) }
+
+
+
 
 
         }
     }
+
+
 
 
 
