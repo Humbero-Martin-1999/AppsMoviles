@@ -7,13 +7,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AssistChip
@@ -61,20 +69,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.workclass.data.model.MenuModel
 import kotlinx.coroutines.launch
 
 
 @Composable
 fun ComponentsScreen(navController: NavHostController) {
-    // Buttons()
-    // FloatingButtons()
-    // Progress()
-    // Chips()
-    // Sliders()
-    // Switches()
-    // Badges()
-    // SnackBars()
-    // AlertDialogs()
+    val menuOptions = arrayOf(
+        MenuModel(1,"Buttons","first",Icons.Filled.AccountBox),
+        MenuModel(2,"Floating Buttons","second",Icons.Filled.Call),
+        MenuModel(3,"Progress","third",Icons.Filled.Star),
+        MenuModel(4,"Chips","fourth",Icons.Filled.Star),
+        MenuModel(5,"Sliders","fifth",Icons.Filled.DateRange),
+        MenuModel(6,"Switches","sixth",Icons.Filled.PlayArrow),
+        MenuModel(7,"Badges","seventh",Icons.Filled.Warning),
+        MenuModel(8,"Snack Bar","eighth",Icons.Filled.MailOutline),
+        MenuModel(9,"Alert Dialogs","ninth",Icons.Filled.ThumbUp)
+
+    )
 
     var option by remember { mutableStateOf("Buttons") }
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -86,105 +98,24 @@ fun ComponentsScreen(navController: NavHostController) {
             ModalDrawerSheet {
                 Text("Menu", modifier = Modifier.padding(16.dp))
                 HorizontalDivider()
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.AccountBox, contentDescription = "Buttons") },
-                    label = { Text("Buttons") },
-                    selected = option == "first",
-                    onClick = {
-                        option = "first"
-                        scope.launch {
-                            drawerState.close()
-                        }
+                LazyColumn {
+                    items( menuOptions) { item ->
+                        NavigationDrawerItem(
+                            icon = { Icon(item.icon, contentDescription = "") },
+                            label = { Text(item.title) },
+                            selected = false,
+                            onClick = {
+                                option = item.option
+                                scope.launch {
+                                    drawerState.apply {
+                                        close()
+                                    }
+                                }
+                            }
+                        )
                     }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.AccountBox, contentDescription = "FloatingButtons") },
-                    label = { Text("FloatingButtons") },
-                    selected = option == "second",
-                    onClick = {
-                        option = "second"
-                        scope.launch {
-                            drawerState.close()
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.AccountBox, contentDescription = "Progress") },
-                    label = { Text("Progress") },
-                    selected = option == "third",
-                    onClick = {
-                        option = "third"
-                        scope.launch {
-                            drawerState.close()
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.AccountBox, contentDescription = "Chips") },
-                    label = { Text("Chips") },
-                    selected = option == "fourth",
-                    onClick = {
-                        option = "fourth"
-                        scope.launch {
-                            drawerState.close()
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.AccountBox, contentDescription = "Sliders") },
-                    label = { Text("Sliders") },
-                    selected = option == "fifth",
-                    onClick = {
-                        option = "fifth"
-                        scope.launch {
-                            drawerState.close()
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.AccountBox, contentDescription = "Switches") },
-                    label = { Text("Switches") },
-                    selected = option == "sixth",
-                    onClick = {
-                        option = "sixth"
-                        scope.launch {
-                            drawerState.close()
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.AccountBox, contentDescription = "Badges") },
-                    label = { Text("Badges") },
-                    selected = option == "seventh",
-                    onClick = {
-                        option = "seventh"
-                        scope.launch {
-                            drawerState.close()
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.AccountBox, contentDescription = "SnackBars") },
-                    label = { Text("SnackBars") },
-                    selected = option == "eighth",
-                    onClick = {
-                        option = "eighth"
-                        scope.launch {
-                            drawerState.close()
-                        }
-                    }
-                )
-                NavigationDrawerItem(
-                    icon = { Icon(Icons.Filled.AccountBox, contentDescription = "AlertDialogs") },
-                    label = { Text("AlertDialogs") },
-                    selected = option == "ninth",
-                    onClick = {
-                        option = "ninth"
-                        scope.launch {
-                            drawerState.close()
-                        }
-                    }
-                )
+                }
+
             }
         }
     ) {
