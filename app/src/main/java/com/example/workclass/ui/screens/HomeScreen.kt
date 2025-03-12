@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.font.FontWeight
 import com.example.workclass.R
 
+
 @Composable
 fun HomeScreen(navController: NavHostController){
     TopBar()
