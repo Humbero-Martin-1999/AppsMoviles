@@ -41,6 +41,8 @@ android {
 
 dependencies {
 
+
+    implementation ("com.google.accompanist:accompanist-swiperefresh:0.28.0")
     implementation(libs.androidx.adaptive.android)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

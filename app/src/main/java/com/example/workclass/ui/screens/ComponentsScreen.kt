@@ -4,8 +4,10 @@ import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -67,10 +69,13 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -87,6 +92,22 @@ import com.example.workclass.data.model.MenuModel
 import com.example.workclass.data.model.PostCardModel
 import com.example.workclass.ui.components.PostCardComponent
 import kotlinx.coroutines.launch
+import android.app.DatePickerDialog
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import java.util.Calendar
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.ui.res.painterResource
+import kotlinx.coroutines.delay
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import androidx.compose.material3.*
+
 
 @Composable
 fun ComponentsScreen(navController: NavHostController) {
@@ -100,7 +121,12 @@ fun ComponentsScreen(navController: NavHostController) {
         MenuModel(7, "Badges", "seventh", Icons.Filled.Warning),
         MenuModel(8, "Snack Bar", "eighth", Icons.Filled.MailOutline),
         MenuModel(9, "Alert Dialogs", "ninth", Icons.Filled.ThumbUp),
-        MenuModel(10, "Bars", "then", Icons.Filled.ThumbUp)
+        MenuModel(10, "Bars", "then", Icons.Filled.ThumbUp),
+        MenuModel(11, "Input Fields", "inputfields", Icons.Filled.Person),
+        MenuModel(12, "Date Pickers", "datepicker", Icons.Filled.DateRange),
+        MenuModel(13, "Pull to Refresh", "pulltorefresh", Icons.Filled.Refresh),
+        MenuModel(14, "Bottom Sheets", "bottomsheet", Icons.Filled.Star),
+        MenuModel(15, "Segmented Buttons", "segmented", Icons.Filled.Star)
     )
 
     var option by remember { mutableStateOf("Buttons") }
@@ -143,6 +169,11 @@ fun ComponentsScreen(navController: NavHostController) {
                 "eighth" -> SnackBars()
                 "ninth" -> AlertDialogs()
                 "then" -> Bars()
+                "inputfields" -> InputFields()
+                "datepicker" -> DatePickers()
+                "pulltorefresh" -> PullToRefreshScreen()
+                "bottomsheet" -> BottomSheets()
+                "segmented" -> SegmentedButtons()
                 else -> { }
             }
         }
@@ -285,7 +316,7 @@ fun Sliders() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
-        var sliderPosition by remember { mutableStateOf(50f) }
+        var sliderPosition by remember { mutableFloatStateOf(50f) }
         Slider(
             value = sliderPosition,
             onValueChange = { sliderPosition = it },
@@ -341,7 +372,7 @@ fun Badges() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
-        var itemCount by remember { mutableStateOf(0) }
+        var itemCount by remember { mutableIntStateOf(0) }
         BadgedBox(
             badge = {
                 if (itemCount > 0) {
@@ -527,4 +558,184 @@ fun Adaptive() {
         Text("Width: $width")
     }
 }
+@Composable
+fun InputFields() {
+    var text by remember { mutableStateOf("") }
 
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        TextField(
+            value = text,
+            onValueChange = { text = it },
+            label = { Text("Ingrese su texto") }
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = {  }) {
+            Text("Enviar")
+        }
+    }
+}
+@Composable
+fun DatePickers() {
+    val context = LocalContext.current
+    var selectedDate by remember { mutableStateOf("") }
+
+
+    val calendar = Calendar.getInstance()
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH)
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+    val datePickerDialog = DatePickerDialog(
+        context,
+        { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+            selectedDate = "$selectedDayOfMonth/${selectedMonth + 1}/$selectedYear"
+        },
+        year,
+        month,
+        day
+    )
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = if (selectedDate.isEmpty()) "Seleccione una fecha" else "Fecha seleccionada: $selectedDate",
+            style = MaterialTheme.typography.bodyLarge
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = { datePickerDialog.show() }) {
+            Text("Abrir Date Picker")
+        }
+    }
+}
+
+@Composable
+fun PullToRefreshScreen() {
+    var isRefreshing by remember { mutableStateOf(false) }
+    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing)
+    val coroutineScope = rememberCoroutineScope()
+
+    val images = listOf(R.drawable.download, R.drawable.portada_nemo, R.drawable.image)
+    var imageIndex by remember { mutableStateOf(0) }
+
+    SwipeRefresh(
+        state = swipeRefreshState,
+        onRefresh = {
+            coroutineScope.launch {
+                isRefreshing = true
+                delay(2000)
+                imageIndex = (imageIndex + 1) % images.size
+                isRefreshing = false
+            }
+        },
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+        ) {
+            Image(
+                painter = painterResource(id = images[imageIndex]),
+                contentDescription = "Imagen ${imageIndex + 1}",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(300.dp)
+            )
+        }
+    }
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun BottomSheets() {
+    var showSheet by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(onClick = { showSheet = true }) {
+            Text("Mostrar Bottom Sheet")
+        }
+    }
+
+    if (showSheet) {
+        ModalBottomSheet(
+            onDismissRequest = { showSheet = false }
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text("Este es un Bottom Sheet", style = MaterialTheme.typography.headlineSmall)
+                Spacer(modifier = Modifier.height(8.dp))
+                Text("Aquí puedes agregar el contenido que desees.")
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(
+                    onClick = {
+                        // Cierra el bottom sheet
+                        showSheet = false
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Cerrar")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun SegmentedButtons() {
+    var selectedIndex by remember { mutableIntStateOf(0) }
+    val segments = listOf("Option 1", "Option 2", "Option 3")
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        segments.forEachIndexed { index, segment ->
+            Button(
+                onClick = { selectedIndex = index },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (selectedIndex == index)
+                        MaterialTheme.colorScheme.primary
+                    else
+                        MaterialTheme.colorScheme.surface,
+                    contentColor = if (selectedIndex == index)
+                        MaterialTheme.colorScheme.onPrimary
+                    else
+                        MaterialTheme.colorScheme.onSurface
+                ),
+                shape = when (index) {
+                    0 -> RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp)
+                    segments.lastIndex -> RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp)
+                    else -> RoundedCornerShape(0.dp)
+                },
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(segment)
+            }
+            if (index < segments.lastIndex) {
+                Spacer(modifier = Modifier.width(1.dp))
+            }
+        }
+    }
+}

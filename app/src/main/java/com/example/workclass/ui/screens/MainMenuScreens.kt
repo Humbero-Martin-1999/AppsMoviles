@@ -45,10 +45,5 @@ fun MainMenuScreen(navController: NavHostController) {
         ) {
             Text("Components Screen")
         }
-        Button(
-            onClick = { navController.navigate("components_screen") }
-
-        ) { }
-
     }
 }
