@@ -1,6 +1,5 @@
 package com.example.workclass.data.model
 
-import androidx.compose.ui.graphics.vector.ImageVector
 
 data class AccountModel(
     var id:Int = 0,
