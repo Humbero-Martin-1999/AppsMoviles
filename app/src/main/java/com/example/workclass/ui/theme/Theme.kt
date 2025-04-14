@@ -1,6 +1,6 @@
 package com.example.workclass.ui.theme
 
-import android.app.Activity
+
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -12,14 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Gray800,
-    secondary = Gray50,
-    tertiary = Pink80
+    primary = Negro,
+    secondary = BlueGray300,
+    tertiary = BlueGray50,
+    background = BlueGray900,
+    surface = BlueGray800
+
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Gray100,
-    secondary = Gray900,
+    primary = BlueGray100,
+    secondary = BlueGray900,
     tertiary = Pink40
 
     /* Other default colors to override
@@ -41,11 +44,6 @@ fun WorkClassTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
