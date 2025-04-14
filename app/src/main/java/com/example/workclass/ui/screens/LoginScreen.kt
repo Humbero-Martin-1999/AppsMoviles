@@ -43,7 +43,7 @@ fun LoginScreen(navController: NavController){
     Column (
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .background(MaterialTheme.colorScheme.primary)
             .verticalScroll((rememberScrollState())),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
@@ -60,7 +60,7 @@ fun LoginForm(
     val context = LocalContext.current
     Card(
         colors = CardDefaults.cardColors(
-            contentColor = Color.White,
+            contentColor = Color.DarkGray,
             containerColor = MaterialTheme.colorScheme.surface
         ),
         modifier = Modifier. padding(40.dp,0.dp)
@@ -111,8 +111,8 @@ fun LoginForm(
             )
             FilledTonalButton(
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    contentColor = MaterialTheme.colorScheme.secondary
+                    containerColor = Color.Black,
+                    contentColor = Color.White
                 ),
                 modifier = Modifier.fillMaxWidth().padding(0.dp,10.dp),
                 shape = CutCornerShape(4.dp),
@@ -122,8 +122,8 @@ fun LoginForm(
             }
             OutlinedButton (
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Transparent,
-                    contentColor = MaterialTheme.colorScheme.primary
+                    containerColor = Color.Black,
+                    contentColor = Color.White
                 ),
                 modifier = Modifier.fillMaxWidth().padding(0.dp,10.dp),
                 shape = CutCornerShape(4.dp),
