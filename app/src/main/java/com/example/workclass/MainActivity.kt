@@ -1,13 +1,17 @@
 package com.example.workclass
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.workclass.data.model.database.AppDatabase
+import com.example.workclass.data.model.database.DatabaseProvider
 import com.example.workclass.ui.screens.AccountScreen
 import com.example.workclass.ui.screens.ComponentsScreen
 import com.example.workclass.ui.screens.FavoriteAccountScreen
@@ -20,16 +24,23 @@ import com.example.workclass.ui.screens.TestScreen
 import com.example.workclass.ui.theme.WorkClassTheme
 
 class MainActivity : ComponentActivity() {
+    lateinit var database:AppDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
+        try{
+            database = DatabaseProvider.getDatabase(this)
+            Log.d("debug-db","Database loaded succesfully")
+        }catch(exception:Exception){
+            Log.d("debug-db","Error: $exception")
+        }
+        enableEdgeToEdge()
         setContent {
             WorkClassTheme {
                 ComposeMultiScreenApp()
+
             }
         }
     }
-
 }
 
     @Composable
