@@ -23,7 +23,6 @@ fun TopBarComponent(title:String, navController: NavController, location:String)
         title = {
             Text(text = title)
         },
-        // Ajusta los colores de la barra
         colors = TopAppBarDefaults.mediumTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,    // color de fondo de la Top App Bar
             titleContentColor = Color.White,  // color del título

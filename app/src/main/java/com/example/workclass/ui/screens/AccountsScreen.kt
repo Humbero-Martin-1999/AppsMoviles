@@ -74,8 +74,8 @@ fun AccountScreen(
                 // Envolvemos el componente en un MaterialTheme local que ajuste el esquema
                 MaterialTheme(
                     colorScheme = MaterialTheme.colorScheme.copy(
-                        surfaceVariant = Color(0xFF73C2D7),   // Por ejemplo, un azul claro
-                        onSurfaceVariant = Color.Black         // Y el contenido en negro (o el que prefieras)
+                        surfaceVariant = Color(0xFF73C2D7),
+                        onSurfaceVariant = Color.Black
                     )
                 ) {
                     AccountCardComponent(

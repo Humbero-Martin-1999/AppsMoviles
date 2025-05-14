@@ -1,5 +1,6 @@
 package com.example.workclass
 
+import AppScreen
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -19,9 +20,11 @@ import com.example.workclass.ui.screens.HomeScreen
 import com.example.workclass.ui.screens.LoginScreen
 import com.example.workclass.ui.screens.MainMenuScreen
 import com.example.workclass.ui.screens.ManageAccountScreen
+import com.example.workclass.ui.screens.ReporteFotoApp
 import com.example.workclass.ui.screens.UIParamountScreen
 import com.example.workclass.ui.screens.TestScreen
 import com.example.workclass.ui.theme.WorkClassTheme
+
 
 class MainActivity : ComponentActivity() {
     lateinit var database:AppDatabase
@@ -50,7 +53,7 @@ class MainActivity : ComponentActivity() {
     }
     @Composable
     fun SetupNavGraph(navController: NavHostController){
-        NavHost(navController = navController, startDestination = "login_screen"){
+        NavHost(navController = navController, startDestination = "main_menu"){
             composable("main_menu"){ MainMenuScreen(navController)}
             composable("home_screen"){ HomeScreen(navController)}
             composable("test_screen"){ TestScreen(navController)}
@@ -58,6 +61,9 @@ class MainActivity : ComponentActivity() {
             composable("components_screen"){ ComponentsScreen(navController) }
             composable("login_screen"){ LoginScreen(navController) }
             composable("account_screen"){ AccountScreen(navController) }
+            composable("camara_screen") { ReporteFotoApp(navController) }
+            composable("agenda_screen") { AppScreen() }
+
             composable("manage_account_screen?id={id}") { backStackEntry ->
                 val id = backStackEntry.arguments?.getString("id")?.toIntOrNull()
                 ManageAccountScreen(navController = navController, id = id)
@@ -66,8 +72,12 @@ class MainActivity : ComponentActivity() {
 
 
 
+
+
         }
     }
+
+
 
 
 
