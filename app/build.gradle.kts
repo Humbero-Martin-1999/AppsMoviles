@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -79,6 +81,9 @@ dependencies {
 
 
 
+
+
+
     /*
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -104,6 +109,11 @@ dependencies {
     implementation ("io.coil-kt:coil-compose:2.2.2")
 
 
+
+    implementation("androidx.work:work-runtime-ktx:2.10.1")
+    implementation ("androidx.work:work-runtime:2.10.1")
+
+    implementation ("androidx.biometric:biometric:1.2.0-alpha05")
 
 
 
