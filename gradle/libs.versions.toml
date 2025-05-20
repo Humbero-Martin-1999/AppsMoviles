@@ -1,6 +1,6 @@
 [versions]
 accompanistSwiperefresh = "0.31.2-alpha"
-agp = "8.9.1"
+agp = "8.10.0"
 coilCompose = "2.4.0"
 coilComposeVersion = "2.6.0"
 converterGson = "2.9.0"
@@ -22,9 +22,12 @@ adaptiveAndroid = "1.0.0"
 okhttp = "4.11.0"
 retrofit2KotlinxSerializationConverter = "1.0.0"
 roomCommonJvm = "2.7.0"
+workRuntimeKtx = "2.10.1"
 
 
 [libraries]
+androidx-work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntimeKtx" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-runtime-ktx-v262 = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
